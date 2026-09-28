@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Build a product quotation for Agree (Fujian) Sanitary Products Co., Ltd." />
+    <title>Agree (Fujian) Sanitary Products Co., Ltd | Product Quotation Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Agree (Fujian) Sanitary Products Co., Ltd quotation calculator home"><span style="font-size:clamp(13px,2vw,20px);letter-spacing:-.7px">Agree (Fujian) Sanitary Products Co., Ltd</span><small>PRODUCT QUOTATION</small></a>
+      <div class="topbar-note">USD pricing · EXW basis</div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <p class="eyebrow">Self-service quotation</p>
+        <h1>Select products.<br /><em>See the shipment.</em></h1>
+        <p class="intro">Choose quantities by bale to create an instant itemized quotation. Product volume and packing details update as you build your order.</p>
+        <a class="start-link" href="#products">Start selecting <span>↓</span></a>
+      </section>
+
+      <section class="quotation-meta panel" aria-labelledby="details-title">
+        <div class="section-heading"><p class="eyebrow">01 — Buyer details</p><h2 id="details-title">Tell us where to send the quote</h2></div>
+        <div class="details-grid">
+          <label>Company / buyer name<input id="buyerName" type="text" placeholder="Your company name" /></label>
+          <label>Contact name<input id="contactName" type="text" placeholder="Your name" /></label>
+          <label>Email<input id="email" type="email" placeholder="name@company.com" /></label>
+          <label>Destination<input id="destination" type="text" placeholder="Country or port" /></label>
+          <label>Quotation reference<input id="quoteRef" type="text" placeholder="Optional reference" /></label>
+          <label>Quotation date<input id="quoteDate" type="date" /></label>
+        </div>
+      </section>
+
+      <section class="products-section" id="products" aria-labelledby="products-title">
+        <div class="section-heading products-heading"><div><p class="eyebrow">02 — Products</p><h2 id="products-title">Build your order</h2></div><div class="filters"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search product or size" /></label><select id="categoryFilter" aria-label="Filter by category"><option value="all">All product lines</option></select></div></div>
+        <p class="selection-hint">Quantities are in bales. One bale contains the number of packs shown for each item.</p>
+        <div id="productList" class="product-list"></div>
+      </section>
+
+      <section class="summary-section" id="quotation" aria-labelledby="quotation-title">
+        <div class="section-heading"><p class="eyebrow">03 — Your quotation</p><h2 id="quotation-title">Order summary</h2></div>
+        <div class="summary-layout">
+          <div class="quote-sheet panel">
+            <div class="quote-sheet-head"><div><strong>Agree (Fujian) Sanitary Products Co., Ltd</strong><span>Product quotation</span></div><span id="displayRef" class="mono"></span></div>
+            <div id="quoteCustomer" class="quote-customer">Add your buyer details above to personalize this quotation.</div>
+            <div class="table-wrap"><table><thead><tr><th>Product</th><th>Pack</th><th>Bales</th><th>Packs</th><th>Unit price</th><th>CBM</th><th>Amount</th><th></th></tr></thead><tbody id="quoteItems"><tr class="empty-row"><td colspan="8">Your selected products will appear here.</td></tr></tbody></table></div>
+            <div class="quote-footer"><div class="quote-note">Price basis: USD, EXW. Freight, duties, insurance and local charges are not included.</div><div class="totals"><div><span>Total bales</span><strong id="totalBales">0</strong></div><div><span>Total packs</span><strong id="totalPacks">0</strong></div><div><span>Total CBM</span><strong id="totalCbm">0.000</strong></div><div class="grand-total"><span>Total amount</span><strong id="totalPrice">$0.00</strong></div></div></div>
+            <div class="contact-details" style="display:flex;align-items:center;gap:28px;margin-top:26px;padding-top:18px;border-top:1px solid #d8ded7"><p class="eyebrow" style="margin:0 auto 0 0">Contact us</p><div><span style="display:block;color:#63716a;font-size:10px;text-transform:uppercase;letter-spacing:.7px">Email</span><a style="color:#165b47;font-weight:700;text-decoration:none" href="mailto:sales@eco-agree.com">sales@eco-agree.com</a></div><div><span style="display:block;color:#63716a;font-size:10px;text-transform:uppercase;letter-spacing:.7px">WhatsApp</span><a style="color:#165b47;font-weight:700;text-decoration:none" href="https://wa.me/8613505998661" target="_blank" rel="noopener">0086-13505998661</a></div></div>
+          </div>
+          <aside class="summary-aside panel"><p class="eyebrow">Order controls</p><h3>Ready to share?</h3><p>Review the quantities, then download or print a clean quotation.</p><button class="primary-button" id="printQuote">Print / Save PDF</button><button class="secondary-button" id="downloadCsv">Download CSV</button><button class="text-button" id="clearQuote">Clear selection</button><hr /><p class="small-note">Prices and pack data are based on the supplied CBM workbook. Confirm final commercial terms with Agree (Fujian) Sanitary Products Co., Ltd before placing an order.</p></aside>
+        </div>
+      </section>
+    </main>
+    <footer><span>Agree (Fujian) Sanitary Products Co., Ltd</span><span>Customer self-service · <span id="year"></span></span></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
