@@ -1,119 +1,555 @@
+
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Build a product quotation for Agree (Fujian) Sanitary Products Co., Ltd." />
-    <title>Agree (Fujian) Sanitary Products Co., Ltd | Product Quotation Calculator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="topbar">
-      <a class="brand" href="#top" aria-label="Agree (Fujian) Sanitary Products Co., Ltd quotation calculator home"><span style="font-size:clamp(13px,2vw,20px);letter-spacing:-.7px">Agree (Fujian) Sanitary Products Co., Ltd</span><small>PRODUCT QUOTATION</small></a>
-      <div class="topbar-note">USD pricing · EXW basis</div>
-    </header>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <main id="top">
-      <section class="hero">
-        <p class="eyebrow">Self-service quotation</p>
-        <h1>Select products.<br /><em>See the shipment.</em></h1>
-        <p class="intro">Choose quantities by bale to create an instant itemized quotation. Product volume and packing details update as you build your order.</p>
-        <a class="start-link" href="#products">Start selecting <span>↓</span></a>
-      </section>
+  <meta name="description"
+        content="Build a product quotation for Agree (Fujian) Sanitary Products Co., Ltd." />
 
-      <section class="quotation-meta panel" aria-labelledby="details-title">
-        <div class="section-heading"><p class="eyebrow">01 — Buyer details</p><h2 id="details-title">Tell us where to send the quote</h2></div>
-        <div class="details-grid">
-          <label>Company / buyer name<input id="buyerName" type="text" placeholder="Your company name" /></label>
-          <label>Contact name<input id="contactName" type="text" placeholder="Your name" /></label>
-          <label>Email<input id="email" type="email" placeholder="name@company.com" /></label>
-          <label>Destination<input id="destination" type="text" placeholder="Country or port" /></label>
-          <label>Quotation reference<input id="quoteRef" type="text" placeholder="Optional reference" /></label>
-          <label>Quotation date<input id="quoteDate" type="date" /></label>
+  <title>Agree (Fujian) Sanitary Products Co., Ltd | Product Quotation Calculator</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Bank details styling -->
+  <style>
+    .bank-details {
+      margin-top: 24px;
+      padding: 20px 0;
+      border-top: 1px solid #d8ded7;
+      color: #15241e;
+    }
+
+    .bank-details h3 {
+      font-size: 15px;
+      letter-spacing: 0;
+      color: #165b47;
+      font-weight: 800;
+      margin: 0 0 14px;
+    }
+
+    .bank-details dl {
+      display: grid;
+      grid-template-columns: 145px minmax(0, 1fr);
+      gap: 8px 14px;
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .bank-details dt {
+      font-weight: 700;
+      color: #15241e;
+    }
+
+    .bank-details dd {
+      margin: 0;
+      color: #34443c;
+    }
+
+    @media (max-width: 620px) {
+      .bank-details dl {
+        grid-template-columns: 1fr;
+        gap: 3px;
+      }
+
+      .bank-details dt:not(:first-child) {
+        margin-top: 8px;
+      }
+    }
+
+    @media print {
+      .bank-details {
+        display: block !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        margin-top: 18px;
+        padding-top: 14px;
+      }
+
+      .bank-details dl {
+        grid-template-columns: 145px minmax(0, 1fr);
+        gap: 5px 10px;
+        font-size: 10px;
+      }
+
+      .bank-details h3 {
+        font-size: 12px;
+        margin-bottom: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <a
+      class="brand"
+      href="#top"
+      aria-label="Agree (Fujian) Sanitary Products Co., Ltd quotation calculator home"
+    >
+      <span style="font-size:clamp(13px,2vw,20px);letter-spacing:-.7px">
+        Agree (Fujian) Sanitary Products Co., Ltd
+      </span>
+      <small>PRODUCT QUOTATION</small>
+    </a>
+
+    <div class="topbar-note">
+      USD pricing · EXW basis
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <p class="eyebrow">Self-service quotation</p>
+
+      <h1>
+        Select products.<br />
+        <em>See the shipment.</em>
+      </h1>
+
+      <p class="intro">
+        Choose quantities by bale to create an instant
+        itemized quotation. Product volume and packing
+        details update as you build your order.
+      </p>
+
+      <a class="start-link" href="#products">
+        Start selecting <span>↓</span>
+      </a>
+    </section>
+
+    <!-- BUYER DETAILS -->
+    <section
+      class="quotation-meta panel"
+      aria-labelledby="details-title"
+    >
+      <div class="section-heading">
+        <p class="eyebrow">01 — Buyer details</p>
+        <h2 id="details-title">
+          Tell us where to send the quote
+        </h2>
+      </div>
+
+      <div class="details-grid">
+
+        <label>
+          Company / buyer name
+          <input
+            id="buyerName"
+            type="text"
+            placeholder="Your company name"
+          />
+        </label>
+
+        <label>
+          Contact name
+          <input
+            id="contactName"
+            type="text"
+            placeholder="Your name"
+          />
+        </label>
+
+        <label>
+          Email
+          <input
+            id="email"
+            type="email"
+            placeholder="name@company.com"
+          />
+        </label>
+
+        <label>
+          Destination
+          <input
+            id="destination"
+            type="text"
+            placeholder="Country or port"
+          />
+        </label>
+
+        <label>
+          Quotation reference
+          <input
+            id="quoteRef"
+            type="text"
+            placeholder="Optional reference"
+          />
+        </label>
+
+        <label>
+          Quotation date
+          <input
+            id="quoteDate"
+            type="date"
+          />
+        </label>
+
+      </div>
+    </section>
+
+    <!-- PRODUCT SELECTION -->
+    <section
+      class="products-section"
+      id="products"
+      aria-labelledby="products-title"
+    >
+
+      <div class="section-heading products-heading">
+
+        <div>
+          <p class="eyebrow">02 — Products</p>
+          <h2 id="products-title">
+            Build your order
+          </h2>
         </div>
-      </section>
- 
-      <section class="products-section" id="products" aria-labelledby="products-title">
-        <div class="section-heading products-heading"><div><p class="eyebrow">02 — Products</p><h2 id="products-title">Build your order</h2></div><div class="filters"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search product or size" /></label><select id="categoryFilter" aria-label="Filter by category"><option value="all">All product lines</option></select></div></div>
-        <p class="selection-hint">Quantities are in bales. One bale contains the number of packs shown for each item.</p>
-        <div id="productList" class="product-list"></div>
-      </section>
 
-      <section class="summary-section" id="quotation" aria-labelledby="quotation-title">
-        <div class="section-heading"><p class="eyebrow">03 — Your quotation</p><h2 id="quotation-title">Order summary</h2></div>
-        <div class="summary-layout">
-          <div class="quote-sheet panel">
-            <div class="quote-sheet-head"><div><strong>Agree (Fujian) Sanitary Products Co., Ltd</strong><span>Product quotation</span></div><span id="displayRef" class="mono"></span></div>
-            <div id="quoteCustomer" class="quote-customer">Add your buyer details above to personalize this quotation.</div>
-            <div class="table-wrap"><table><thead><tr><th>Product</th><th>Pack</th><th>Bales</th><th>Packs</th><th>Unit price</th><th>CBM</th><th>Amount</th><th></th></tr></thead><tbody id="quoteItems"><tr class="empty-row"><td colspan="8">Your selected products will appear here.</td></tr></tbody></table></div>
-            <div class="quote-footer"><div class="quote-note">Price basis: USD, EXW. Freight, duties, insurance and local charges are not included.</div><div class="totals"><div><span>Total bales</span><strong id="totalBales">0</strong></div><div><span>Total packs</span><strong id="totalPacks">0</strong></div><div><span>Total CBM</span><strong id="totalCbm">0.000</strong></div><div class="grand-total"><span>Total amount</span><strong id="totalPrice">$0.00</strong></div></div></div>
-            
-<!-- BANK DETAILS START -->
-<section class="bank-details"
-  style="
-    margin-top:24px;
-    padding:20px 0;
-    border-top:1px solid #d8ded7;
-    font-size:12px;
-    line-height:1.7;
-    break-inside:avoid;
-    page-break-inside:avoid;
-  ">
+        <div class="filters">
 
-  <h3 style="
-    font-size:15px;
-    color:#165b47;
-    font-weight:800;
-    letter-spacing:0;
-    margin:0 0 14px 0;
-  ">
-    BENEFICIARY BANK DETAILS
-  </h3>
+          <label class="search">
+            <span>⌕</span>
+            <input
+              id="search"
+              type="search"
+              placeholder="Search product or size"
+            />
+          </label>
 
-  <div style="
-    display:grid;
-    grid-template-columns:130px minmax(0,1fr);
-    gap:7px 12px;
-    overflow-wrap:anywhere;
-  ">
+          <select
+            id="categoryFilter"
+            aria-label="Filter by category"
+          >
+            <option value="all">
+              All product lines
+            </option>
+          </select>
 
-    <strong>Bank Name:</strong>
-    <span>HSBC Hong Kong</span>
+        </div>
+      </div>
 
-    <strong>Bank Address:</strong>
-    <span>1 Queen's Road Central, Hong Kong</span>
+      <p class="selection-hint">
+        Quantities are in bales. One bale contains the
+        number of packs shown for each item.
+      </p>
 
-    <strong>SWIFT / BIC:</strong>
-    <span>HSBCHKHHHKH</span>
+      <div
+        id="productList"
+        class="product-list"
+      ></div>
 
-    <strong>Account Number:</strong>
-    <span>801366923838</span>
+    </section>
 
-    <strong>Beneficiary:</strong>
-    <span>
-      AGREE (FUJIAN) SANITARY PRODUCTS CO., LIMITED
-    </span>
+    <!-- QUOTATION SUMMARY -->
+    <section
+      class="summary-section"
+      id="quotation"
+      aria-labelledby="quotation-title"
+    >
 
-    <strong>Beneficiary Address:</strong>
-    <span>
-      Rm604, 6/F, Easey Commercial Building,
-      253-261 Hessney Road,
-      Kowloon, Hong Kong
-    </span>
+      <div class="section-heading">
+        <p class="eyebrow">03 — Your quotation</p>
+        <h2 id="quotation-title">
+          Order summary
+        </h2>
+      </div>
 
-  </div>
-</section>
-<!-- BANK DETAILS END -->
-<div class="contact-details" style="display:flex;align-items:center;gap:28px;margin-top:26px;padding-top:18px;border-top:1px solid #d8ded7"><p class="eyebrow" style="margin:0 auto 0 0">Contact us</p><div><span style="display:block;color:#63716a;font-size:10px;text-transform:uppercase;letter-spacing:.7px">Email</span><a style="color:#165b47;font-weight:700;text-decoration:none" href="mailto:sales@eco-agree.com">sales@eco-agree.com</a></div><div><span style="display:block;color:#63716a;font-size:10px;text-transform:uppercase;letter-spacing:.7px">WhatsApp</span><a style="color:#165b47;font-weight:700;text-decoration:none" href="https://wa.me/8613505998661" target="_blank" rel="noopener">0086-13505998661</a></div></div>
+      <div class="summary-layout">
+
+        <div class="quote-sheet panel">
+
+          <!-- QUOTE HEADER -->
+          <div class="quote-sheet-head">
+
+            <div>
+              <strong>
+                Agree (Fujian) Sanitary Products Co., Ltd
+              </strong>
+              <span>Product quotation</span>
+            </div>
+
+            <span
+              id="displayRef"
+              class="mono"
+            ></span>
+
           </div>
-          <aside class="summary-aside panel"><p class="eyebrow">Order controls</p><h3>Ready to share?</h3><p>Review the quantities, then download or print a clean quotation.</p><button class="primary-button" id="printQuote">Print / Save PDF</button><button class="secondary-button" id="downloadCsv">Download CSV</button><button class="text-button" id="clearQuote">Clear selection</button><hr /><p class="small-note">Prices and pack data are based on the supplied CBM workbook. Confirm final commercial terms with Agree (Fujian) Sanitary Products Co., Ltd before placing an order.</p></aside>
+
+          <!-- CUSTOMER DETAILS -->
+          <div
+            id="quoteCustomer"
+            class="quote-customer"
+          >
+            Add your buyer details above to personalize
+            this quotation.
+          </div>
+
+          <!-- QUOTATION TABLE -->
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Pack</th>
+                  <th>Bales</th>
+                  <th>Packs</th>
+                  <th>Unit price</th>
+                  <th>CBM</th>
+                  <th>Amount</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody id="quoteItems">
+                <tr class="empty-row">
+                  <td colspan="8">
+                    Your selected products will appear here.
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+          <!-- TOTALS -->
+          <div class="quote-footer">
+
+            <div class="quote-note">
+              Price basis: USD, EXW.
+              Freight, duties, insurance and local
+              charges are not included.
+            </div>
+
+            <div class="totals">
+
+              <div>
+                <span>Total bales</span>
+                <strong id="totalBales">0</strong>
+              </div>
+
+              <div>
+                <span>Total packs</span>
+                <strong id="totalPacks">0</strong>
+              </div>
+
+              <div>
+                <span>Total CBM</span>
+                <strong id="totalCbm">0.000</strong>
+              </div>
+
+              <div class="grand-total">
+                <span>Total amount</span>
+                <strong id="totalPrice">$0.00</strong>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- BANK DETAILS START -->
+          <section
+            class="bank-details"
+            aria-labelledby="bank-details-title"
+          >
+
+            <h3 id="bank-details-title">
+              BENEFICIARY BANK DETAILS
+            </h3>
+
+            <dl>
+
+              <dt>Bank Name:</dt>
+              <dd>HSBC Hong Kong</dd>
+
+              <dt>Bank Address:</dt>
+              <dd>
+                1 Queen's Road Central, Hong Kong
+              </dd>
+
+              <dt>SWIFT / BIC:</dt>
+              <dd>HSBCHKHHHKH</dd>
+
+              <dt>Account Number:</dt>
+              <dd>801366923838</dd>
+
+              <dt>Beneficiary:</dt>
+              <dd>
+                AGREE (FUJIAN) SANITARY PRODUCTS
+                CO., LIMITED
+              </dd>
+
+              <dt>Beneficiary Address:</dt>
+              <dd>
+                Rm604, 6/F, Easey Commercial Building,
+                253-261 Hessney Road, Kowloon,
+                Hong Kong
+              </dd>
+
+            </dl>
+
+          </section>
+          <!-- BANK DETAILS END -->
+
+          <!-- CONTACT DETAILS -->
+          <div
+            class="contact-details"
+            style="
+              display:flex;
+              align-items:center;
+              flex-wrap:wrap;
+              gap:24px;
+              margin-top:24px;
+              padding-top:18px;
+              border-top:1px solid #d8ded7;
+            "
+          >
+
+            <p
+              class="eyebrow"
+              style="margin:0 auto 0 0"
+            >
+              Contact us
+            </p>
+
+            <div>
+
+              <span style="
+                display:block;
+                color:#63716a;
+                font-size:10px;
+                text-transform:uppercase;
+                letter-spacing:.7px;
+              ">
+                Email
+              </span>
+
+              <a
+                style="
+                  color:#165b47;
+                  font-weight:700;
+                  text-decoration:none;
+                "
+                href="mailto:sales@eco-agree.com"
+              >
+                sales@eco-agree.com
+              </a>
+
+            </div>
+
+            <div>
+
+              <span style="
+                display:block;
+                color:#63716a;
+                font-size:10px;
+                text-transform:uppercase;
+                letter-spacing:.7px;
+              ">
+                WhatsApp
+              </span>
+
+              <a
+                style="
+                  color:#165b47;
+                  font-weight:700;
+                  text-decoration:none;
+                "
+                href="https://wa.me/8613505998661"
+                target="_blank"
+                rel="noopener"
+              >
+                0086-13505998661
+              </a>
+
+            </div>
+
+          </div>
+
         </div>
-      </section>
-    </main>
-    <footer><span>Agree (Fujian) Sanitary Products Co., Ltd</span><span>Customer self-service · <span id="year"></span></span></footer>
-    <script src="app.js"></script>
-  </body>
+
+        <!-- ORDER CONTROLS -->
+        <aside class="summary-aside panel">
+
+          <p class="eyebrow">
+            Order controls
+          </p>
+
+          <h3>Ready to share?</h3>
+
+          <p>
+            Review the quantities, then download or
+            print a clean quotation.
+          </p>
+
+          <button
+            class="primary-button"
+            id="printQuote"
+          >
+            Print / Save PDF
+          </button>
+
+          <button
+            class="secondary-button"
+            id="downloadCsv"
+          >
+            Download CSV
+          </button>
+
+          <button
+            class="text-button"
+            id="clearQuote"
+          >
+            Clear selection
+          </button>
+
+          <hr />
+
+          <p class="small-note">
+            Prices and pack data are based on the
+            supplied CBM workbook.
+            Confirm final commercial terms with
+            Agree (Fujian) Sanitary Products Co., Ltd
+            before placing an order.
+          </p>
+
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>
+      Agree (Fujian) Sanitary Products Co., Ltd
+    </span>
+
+    <span>
+      Customer self-service ·
+      <span id="year"></span>
+    </span>
+  </footer>
+
+  <!-- EXISTING PRODUCT AND PRICE SCRIPT -->
+  <script src="app.js"></script>
+
+</body>
 </html>
