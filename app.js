@@ -51,44 +51,92 @@ const products = [
   cbmPerBale:(length*width*height)/1000000
 }));
 
+
 const categoryImages = {
   "Cuddledry Baby Diaper": {
-    src: "https://cuddledrydiaper.com/wp-content/uploads/2026/09/QQ20260910-095334.png",
+    src: "assets/cuddledry-baby-diaper.jpg",
     alt: "Cuddledry Baby Diaper"
   },
+
   "Cuddledry Baby Pull-Up Pants": {
-    src: "https://cuddledrydiaper.com/wp-content/uploads/2026/09/WechatIMG27336-1-1-1.jpg",
+    src: "assets/cuddledry-baby-pull-up-pants.jpg",
     alt: "Cuddledry Baby Pull-Up Pants"
   },
+
   "Cuddledry Baby Wipes": {
-    src: "https://cuddledrydiaper.com/wp-content/uploads/2026/09/Cuddledry_wipes_4_products_poster_gray_no_title_full.jpg",
+    src: "assets/cuddledry-baby-wipes.jpg",
     alt: "Cuddledry Baby Wipes"
   },
+
   "Sanitary Pad – Cool Fresh": {
-    src: "https://blysspad.com/wp-content/uploads/2026/05/WechatIMG2295.jpg",
+    src: "assets/blyss-cool-fresh-pad.jpg",
     alt: "Blyss Cool Fresh Sanitary Pad"
   },
+
   "Menstrual Pants – Cool Fresh": {
-    src: "https://blysspad.com/wp-content/uploads/2026/05/WechatIMG2293.jpg",
+    src: "assets/blyss-cool-fresh-menstrual-pants.jpg",
     alt: "Blyss Cool Fresh Menstrual Pants"
   },
+
   "Sanitary Pad – Anion": {
-    src: "https://blysspad.com/wp-content/uploads/2026/05/WechatIMG2291.jpg",
+    src: "assets/blyss-anion-pad.jpg",
     alt: "Blyss Anion Sanitary Pad"
   },
+
   "Medinaps Adult Diaper": {
     src: "assets/medinaps-adult-diaper.png",
-    alt: "Medinaps Adult Diaper in M, L and XL"
+    alt: "Medinaps Adult Diaper"
   },
+
   "Medinaps Adult Pull-up Pants": {
-    src: "https://cuddledrydiaper.com/wp-content/uploads/2026/09/exec-de8b9fcc-2f3f-4599-98a2-82d9f9dd76e6.jpg",
+    src: "assets/medinaps-adult-pull-up-pants.jpg",
     alt: "Medinaps Adult Pull-up Pants"
   },
+
   "Medinaps Under Pad": {
-    src: "https://cuddledrydiaper.com/wp-content/uploads/2026/09/exec-e9ffb2c1-ded9-4f9d-961e-86e2f298da09.jpg",
+    src: "assets/medinaps-under-pad.jpg",
     alt: "Medinaps Under Pad"
   }
 };
+
+// Show a clean placeholder if an image cannot load.
+document.addEventListener("error", function(event) {
+  const img = event.target;
+
+  if (img.tagName !== "IMG" || img.dataset.fallbackUsed) {
+    return;
+  }
+
+  img.dataset.fallbackUsed = "true";
+
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="240" height="160"
+         viewBox="0 0 240 160">
+      <rect width="240" height="160"
+            fill="#F4F7F5"/>
+      <rect x="1" y="1" width="238" height="158"
+            fill="none" stroke="#DCE5DF"/>
+      <text x="120" y="78"
+            font-family="Arial,sans-serif"
+            font-size="14" fill="#60746A"
+            text-anchor="middle">
+        Product Image
+      </text>
+      <text x="120" y="99"
+            font-family="Arial,sans-serif"
+            font-size="12" fill="#85958C"
+            text-anchor="middle">
+        Not Available
+      </text>
+    </svg>
+  `;
+
+  img.src = "data:image/svg+xml;charset=UTF-8," +
+    encodeURIComponent(svg);
+
+}, true);
+
 
 const state = { quantities: {} };
 const $ = (selector) => document.querySelector(selector);
